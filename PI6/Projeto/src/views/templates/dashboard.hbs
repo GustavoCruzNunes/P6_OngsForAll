@@ -1,0 +1,42 @@
+<section class="about-section-bg min-h-screen px-6 py-16 text-white">
+  <div class="max-w-7xl mx-auto">
+    <!-- Saudações -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">Bem-vindo, {{user.nome}}!</h1>
+      <p class="text-lg text-white/80">
+        Veja suas estatísticas e acompanhe seu impacto 💙
+      </p>
+    </div>
+
+    <!-- Cards de estatísticas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md">
+        <h2 class="text-3xl font-bold">3</h2>
+        <p class="mt-2 text-white/80">ONGs apoiadas</p>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md">
+        <h2 class="text-3xl font-bold">6</h2>
+        <p class="mt-2 text-white/80">Doações realizadas</p>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md">
+        <h2 class="text-3xl font-bold">R$ 250,00</h2>
+        <p class="mt-2 text-white/80">Total doado</p>
+      </div>
+    </div>
+
+    <!-- Ações principais -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="/ongs" class="bg-white text-[#2D4BA6] font-semibold px-6 py-3 rounded hover:bg-gray-100 transition-all duration-300">
+        Explorar ONGs
+      </a>
+      <a href="/perfil" class="border border-white text-white px-6 py-3 rounded hover:bg-white hover:text-[#2D4BA6] transition-all duration-300">
+        Meu perfil
+      </a>
+      <a href="/logout" class="border border-white text-white px-6 py-3 rounded hover:bg-white hover:text-[#2D4BA6] transition-all duration-300">
+        Sair
+      </a>
+    </div>
+  </div>
+</section>
+
+
