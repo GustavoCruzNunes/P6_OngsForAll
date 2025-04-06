@@ -1,128 +1,60 @@
-
-
-<section
-  class=" flex text-gray-700 flex-col justify-center h-screen items-center"
->
-  <div
-    class="flex flex-col max-w-md bg-gray-100 shadow-md text-center w-screen center p-6 rounded-xl"
-  >
-    <h1
-      class="flex justify-center py-4 text-2xl font-extrabold text-[#1D3273]"
-    ><a href="/" class="flex items-center gap-2"><box-icon
-          color="#1D3273"
-          name="world"
-        ></box-icon>
+<section class=" flex text-gray-700 flex-col justify-center h-screen items-center">
+  <div class="flex flex-col max-w-md bg-gray-100 shadow-md text-center w-screen center p-6 rounded-xl">
+    <h1 class="flex justify-center py-4 text-2xl font-extrabold text-[#1D3273]"><a href="/"
+        class="flex items-center gap-2"><box-icon color="#1D3273" name="world"></box-icon>
         ONG For All</a></h1>
 
-    <div
-      class="tab-section bg-gray-100 p-5 rounded-lg backdrop-filter backdrop-blur-lg bg-opacity-40 min-h-[400px]"
-    >
+    <div class="tab-section bg-gray-100 p-5 rounded-lg backdrop-filter backdrop-blur-lg bg-opacity-40 min-h-[400px]">
       <div class="flex flex-row gap-2 p-2 rounded-full bg-gray-200">
         <button
           class="py-2 rounded-full transition-all text-gray-700 font-bold hover:bg-gray-400 hover:bg-opacity-40 flex-grow w-80"
-          data-tab-target="#tab1"
-        >PF/PJ</button>
+          data-tab-target="#tab1">PF/PJ</button>
         <button
           class="py-2 rounded-full transition-all font-bold hover:bg-gray-400 hover:bg-opacity-40 text-gray-700 flex-grow w-80"
-          data-tab-target="#tab2"
-        >ONG</button>
+          data-tab-target="#tab2">ONG</button>
       </div>
       <div class="mt-4">
         <div id="tab1" class="tab-content text-gray-700">
-          <form class="flex flex-col text-start">
+          <form action="/register-user" method="POST" class="flex flex-col text-start">
             <label for="nome">Nome/Razão social: </label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="nome"
-              name="nome"
-              id="nome"
-              placeholder="Nome"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="text" name="nome" id="nome"
+              placeholder="Nome" required />
+
             <label class="mt-2" for="email">Email: </label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email@email.com"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="email" name="email" id="email"
+              placeholder="email@email.com" required />
+
             <label class="mt-2" for="password">Senha:</label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="************"
-              required
-            />
-            <button
-              class="mt-6 rounded-md bg-[#1D3273] hover:bg-[#1D3273]/90 text-lg text-white py-2"
-              type="submit"
-            >Registrar</button>
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="password" name="password" id="password"
+              placeholder="************" required />
+
+            <button class="mt-6 rounded-md bg-[#1D3273] hover:bg-[#1D3273]/90 text-lg text-white py-2"
+              type="submit">Registrar</button>
           </form>
+
         </div>
         <div id="tab2" class="hidden tab-content text-gray-700">
           <form class="flex flex-col text-start">
             <label for="nomeong">Nome da ONG: </label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="nomeong"
-              name="nomeong"
-              id="nomeong"
-              placeholder="Nome"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="nomeong" name="nomeong" id="nomeong"
+              placeholder="Nome" required />
             <label class="mt-2" for="emailong">Email: </label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="emailong"
-              name="emailong"
-              id="emailong"
-              placeholder="email@email.com"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="emailong" name="emailong" id="emailong"
+              placeholder="email@email.com" required />
             <label class="mt-2" for="passwordong">Senha:</label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="passwordong"
-              name="passwordong"
-              id="passwordong"
-              placeholder="************"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="passwordong" name="passwordong"
+              id="passwordong" placeholder="************" required />
             <label class="mt-2" for="cnpj_ong">CNPJ:</label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="text"
-              name="cnpj_ong"
-              id="cnpj_ong"
-              placeholder="123.456.789-90"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="text" name="cnpj_ong" id="cnpj_ong"
+              placeholder="123.456.789-90" required />
             <label class="mt-2" for="areadeatuacao">Área de Atuação:</label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="text"
-              name="areadeatuacao"
-              id="areadeatuacao"
-              placeholder="123.456.789-90"
-              required
-            />
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="text" name="areadeatuacao"
+              id="areadeatuacao" placeholder="123.456.789-90" required />
             <label class="mt-2" for="telefoneong">Telefone:</label>
-            <input
-              class="border-2 py-2 border-blue-300 rounded-lg p-1"
-              type="text"
-              name="telefoneong"
-              id="telefoneong"
-              placeholder="123.456.789-90"
-              required
-            />
-            <button
-              class="mt-6 rounded-md bg-[#1D3273] hover:bg-[#1D3273]/90 text-lg text-white py-2"
-              type="submit"
-            >Registrar</button>
+            <input class="border-2 py-2 border-blue-300 rounded-lg p-1" type="text" name="telefoneong" id="telefoneong"
+              placeholder="123.456.789-90" required />
+            <button class="mt-6 rounded-md bg-[#1D3273] hover:bg-[#1D3273]/90 text-lg text-white py-2"
+              type="submit">Registrar</button>
           </form>
         </div>
       </div>
@@ -135,7 +67,7 @@
 </section>
 
 <script>
-    const tabs = document.querySelectorAll('[data-tab-target]');
+  const tabs = document.querySelectorAll('[data-tab-target]');
   const tabContents = document.querySelectorAll('.tab-content');
   const activeClasses = ['tabativa', 'bg-[#1D3273]', 'text-white', 'hover:text-gray-700'];
 
@@ -160,4 +92,4 @@
   });
 
 
-  </script>
+</script>

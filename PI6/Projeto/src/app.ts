@@ -1,4 +1,5 @@
 import fastify from 'fastify'
+import formBody from '@fastify/formbody'
 import initViewEngine from './config/view'
 import fastifyStatic from '@fastify/static'
 import path from 'path'
@@ -8,6 +9,8 @@ const host = process.env.NODE_APP_HOST || 'localhost'
 const port = process.env.NODE_APP_PORT || 3000
 
 const server = fastify()
+
+server.register(formBody)
 
 server.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'public'),
