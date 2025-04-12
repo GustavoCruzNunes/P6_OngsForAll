@@ -1,65 +1,149 @@
-<section class="about-section-bg min-h-screen px-6 py-16 text-white animate-fade-slide">
-  <div class="max-w-7xl mx-auto space-y-16">
+<section id="dashboard" class="min-h-screen px-6 py-12 transition-colors duration-300 bg-[#1D3273] text-white dark:bg-white dark:text-[#1D3273]">
+  <div class="max-w-7xl mx-auto space-y-12">
 
-    <!-- Toast de sucesso -->
-    {{#if sucesso}}
-    <div id="toast"
-      class="bg-green-100 text-green-800 border border-green-300 px-4 py-3 rounded relative max-w-md mx-auto animate-fade-slide">
-      <strong class="font-bold">Sucesso:</strong>
-      <span class="block sm:inline">Perfil atualizado com sucesso!</span>
-      <button onclick="document.getElementById('toast').remove()" class="absolute top-1 right-2 text-xl">&times;</button>
-    </div>
-    {{/if}}
-
-    <!-- Cabeçalho com boas-vindas -->
-    <div class="flex justify-between items-center mb-12 flex-wrap gap-4">
+    <!-- Cabeçalho -->
+    <div class="flex justify-between items-center flex-wrap gap-4">
       <div>
-        <h1 class="text-4xl sm:text-5xl font-bold mb-2">Bem-vindo, {{user.nome}}!</h1>
-        <p class="text-lg text-white/80">Veja suas estatísticas e acompanhe seu impacto 💙</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-teal-400 to-blue-600 text-transparent bg-clip-text dark:bg-clip-text dark:text-transparent">
+          Bem-vindo, {{user.nome}}!
+        </h1>
+        <p class="mt-2 text-white/80 dark:text-[#1D3273]/80">
+          Veja suas estatísticas e acompanhe seu impacto 💙
+        </p>
       </div>
-      <a href="/logout"
-         class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded transition-all duration-300">
-        Sair
-      </a>
-    </div>
 
-    <!-- Cards de estatísticas -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md animate-fade-slide delay-100">
-        <h2 class="text-3xl font-bold">3</h2>
-        <p class="mt-2 text-white/80">ONGs apoiadas</p>
-      </div>
-      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md animate-fade-slide delay-200">
-        <h2 class="text-3xl font-bold">6</h2>
-        <p class="mt-2 text-white/80">Doações realizadas</p>
-      </div>
-      <div class="bg-white/10 border border-white/20 rounded-lg p-6 text-center backdrop-blur-md animate-fade-slide delay-300">
-        <h2 class="text-3xl font-bold">R$ 250,00</h2>
-        <p class="mt-2 text-white/80">Total doado</p>
+      <div class="flex gap-3">
+        <button id="themeToggle" class="bg-white text-[#1D3273] dark:bg-[#1D3273] dark:text-white px-4 py-2 rounded shadow hover:opacity-90 transition">
+          Trocar tema
+        </button>
+        <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow">Sair</a>
       </div>
     </div>
 
-    <!-- Informações do usuário -->
-    <div class="bg-white/10 border border-white/20 rounded-lg p-6 backdrop-blur-md animate-fade-slide delay-500">
-      <h2 class="text-2xl font-semibold mb-4 text-white/90">Seus dados</h2>
-      <ul class="text-white/80 space-y-2">
+    <!-- Gráficos -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Gráfico 1 -->
+      <div class="bg-white/10 dark:bg-[#F0F4F8] p-4 rounded-xl border border-white/20 dark:border-gray-300 shadow">
+        <h2 class="text-center font-semibold mb-2 text-white dark:text-[#1D3273]">ONGs apoiadas (por mês)</h2>
+        <canvas id="ongsChart"></canvas>
+      </div>
+
+      <!-- Gráfico 2 -->
+      <div class="bg-white/10 dark:bg-[#F0F4F8] p-4 rounded-xl border border-white/20 dark:border-gray-300 shadow">
+        <h2 class="text-center font-semibold mb-2 text-white dark:text-[#1D3273]">Total doado (R$)</h2>
+        <canvas id="graficoDoacoesMes"></canvas>
+      </div>
+
+      <!-- Gráfico 3 -->
+      <div class="bg-white/10 dark:bg-[#F0F4F8] p-4 rounded-xl border border-white/20 dark:border-gray-300 shadow">
+        <h2 class="text-center font-semibold mb-2 text-white dark:text-[#1D3273]">Doações por tipo</h2>
+        <canvas id="categoriasChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Dados do usuário -->
+    <div class="bg-white/10 dark:bg-[#F0F4F8] border border-white/20 dark:border-gray-300 rounded-xl p-6 shadow-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white dark:text-[#1D3273]">Seus dados</h2>
+      <ul class="space-y-2 text-white/80 dark:text-[#1D3273]/80">
         <li><strong>Nome:</strong> {{user.nome}}</li>
         <li><strong>Email:</strong> {{user.email}}</li>
       </ul>
-      <div class="mt-6">
-        <a href="/perfil/editar"
-           class="inline-flex items-center gap-2 border border-white text-white px-5 py-2 rounded hover:bg-white hover:text-[#2D4BA6] transition-all duration-300">
+      <div class="mt-4">
+        <a href="/perfil/editar" class="inline-block bg-white text-[#1D3273] px-4 py-2 rounded hover:bg-gray-100 transition">
           ✏️ Editar perfil
         </a>
       </div>
     </div>
-
-    <!-- Ações principais -->
-    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-slide delay-700">
-      <a href="/ongs"
-         class="bg-white text-[#2D4BA6] font-semibold px-6 py-3 rounded hover:bg-gray-100 transition-all duration-300">
-        Explorar ONGs
-      </a>
-    </div>
+    
   </div>
+
+  <!-- Scripts -->
+  <script>
+    const labelsMes = {{{labelsMes}}};
+    const valoresMes = {{{valoresMes}}};
+    const labelsTipo = {{{labelsTipo}}};
+    const valoresTipo = {{{valoresTipo}}};
+
+    const getTextColor = () => document.documentElement.classList.contains('dark') ? '#1D3273' : 'white';
+
+    const renderCharts = () => {
+      const baseOptions = {
+        plugins: { legend: { labels: { color: getTextColor() } } },
+        scales: {
+          x: { ticks: { color: getTextColor() } },
+          y: { ticks: { color: getTextColor() } }
+        }
+      };
+
+      // Linha
+      new Chart(document.getElementById('ongsChart'), {
+        type: 'line',
+        data: {
+          labels: labelsMes,
+          datasets: [{
+            label: 'ONGs apoiadas',
+            data: valoresMes,
+            borderColor: '#3B82F6',
+            backgroundColor: '#3B82F655',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: baseOptions
+      });
+
+      // Barras
+      new Chart(document.getElementById('graficoDoacoesMes'), {
+        type: 'bar',
+        data: {
+          labels: labelsMes,
+          datasets: [{
+            label: 'Total doado (R$)',
+            data: valoresMes,
+            backgroundColor: '#10B981',
+            borderRadius: 6
+          }]
+        },
+        options: baseOptions
+      });
+
+      // Pizza
+      new Chart(document.getElementById('categoriasChart'), {
+        type: 'doughnut',
+        data: {
+          labels: labelsTipo,
+          datasets: [{
+            data: valoresTipo,
+            backgroundColor: ['#3B82F6', '#E83FBA', '#10B981', '#F59E0B']
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: getTextColor()
+              }
+            }
+          }
+        }
+      });
+    };
+
+    // Tema
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'dark') {
+      html.classList.add('dark');
+    }
+
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      setTimeout(() => location.reload(), 100); // recarrega para re-renderizar gráficos
+    });
+
+    // Inicializa
+    renderCharts();
+  </script>
 </section>

@@ -1,17 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="bg-white text-gray-900 dark:bg-[#0D1B2A] dark:text-white">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}} {{#if stitle}}
-    - {{stitle}}
-  {{/if}}</title>
-
-  <link rel="stylesheet" href="/public/dist/global.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}} {{#if stitle}} - {{stitle}}{{/if}}</title>
+  <link rel="stylesheet" href="/public/dist/global.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="">
+
+<body class="transition-colors duration-300 bg-white text-gray-900 dark:bg-[#0D1B2A] dark:text-white">
+  <div class="flex justify-end p-4">
+   
+  </div>
+
   {{{body}}}
 
-   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+  <!-- Tema alternador -->
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById('toggle-theme');
+
+    const applyTheme = (theme) => {
+      if (theme === 'dark') {
+        html.classList.add('dark');
+      } else {
+        html.classList.remove('dark');
+      }
+      localStorage.setItem('theme', theme);
+    };
+
+    // Inicializa com tema salvo ou automático
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+
+    toggle.addEventListener('click', () => {
+      const current = html.classList.contains('dark') ? 'dark' : 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+
+  <!-- Gráficos adaptados -->
+  <script>
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = document.documentElement.classList.contains('dark');
+    const labelColor = isDark ? '#FFFFFF' : '#1F2937';
+
+    // Gráfico de linhas
+    const ongs = document.getElementById('ongsChart');
+    if (ongs) {
+      new Chart(ongs, {
+        type: 'line',
+        data: {
+          labels: {{labelsMes}},
+          datasets: [{
+            label: 'ONGs apoiadas',
+            data: {{valoresMes}},
+            borderColor: '#3B82F6',
+            backgroundColor: '#3B82F655',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          plugins: { legend: { labels: { color: labelColor } } },
+          scales: {
+            x: { ticks: { color: labelColor } },
+            y: { ticks: { color: labelColor } }
+          }
+        }
+      });
+    }
+
+    // Gráfico de barras
+    const barras = document.getElementById('graficoDoacoesMes');
+    if (barras) {
+      new Chart(barras, {
+        type: 'bar',
+        data: {
+          labels: {{labelsMes}},
+          datasets: [{
+            label: 'Total doado (R$)',
+            data: {{valoresMes}},
+            backgroundColor: '#10B981',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          plugins: { legend: { labels: { color: labelColor } } },
+          scales: {
+            x: { ticks: { color: labelColor } },
+            y: { ticks: { color: labelColor } }
+          }
+        }
+      });
+    }
+
+    // Gráfico de pizza
+    const categorias = document.getElementById('categoriasChart');
+    if (categorias) {
+      new Chart(categorias, {
+        type: 'doughnut',
+        data: {
+          labels: {{labelsTipo}},
+          datasets: [{
+            data: {{valoresTipo}},
+            backgroundColor: ['#3B82F6', '#E83FBA', '#10B981', '#F59E0B']
+          }]
+        },
+        options: {
+          plugins: { legend: { labels: { color: labelColor } } }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
